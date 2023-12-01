@@ -13,7 +13,7 @@ class videoController extends Controller
     public function index()
     {
         //
-        return 'videos';
+        return view('site.videos');
     }
 
     /**

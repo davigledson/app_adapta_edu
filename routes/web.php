@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\arquivoController;
+use App\Http\Controllers\homeController;
 use App\Http\Controllers\livroController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -16,7 +18,7 @@ use App\Http\Controllers\videoController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('site.index');
 });
 
 Route::get('/dashboard', function () {
@@ -35,9 +37,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
+Route::resource('home',homeController::class);
 Route::resource('livros',livroController::class);
 Route::resource('videos',videoController::class);
+Route::resource('arquivos',arquivoController::class);
 
 
 require __DIR__.'/auth.php';

@@ -5,19 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class livroController extends Controller
+class arquivoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('site.livros');
-       
-    }
-    public function videos()
-    {
-        return view('site.videos');
+        return view('site.arquivos');
     }
 
     /**
