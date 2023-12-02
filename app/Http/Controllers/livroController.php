@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\livro;
 class livroController extends Controller
 {
     /**
@@ -15,9 +15,15 @@ class livroController extends Controller
         return view('site.livros');
        
     }
-    public function videos()
+   
+
+    public function tabela()
     {
-        return view('site.videos');
+        //
+        $livros = livro::all();
+        return view('app.livros.tabela',[
+            'livros' => $livros 
+        ]);
     }
 
     /**
@@ -26,6 +32,7 @@ class livroController extends Controller
     public function create()
     {
         //
+        return view('app.livros.create_edit');
     }
 
     /**
@@ -34,6 +41,15 @@ class livroController extends Controller
     public function store(Request $request)
     {
         //
+    
+        $arquivo = $request->file('arquivo');
+        $arquivo_urn = $arquivo->store('imagens','public');
+          livro::create([
+            'titulo' =>$request->titulo,
+            'link' =>$request->link,
+            'arquivo' => $arquivo_urn,
+          ]);
+        return redirect()->route('app.livro.tabela');
     }
 
     /**
@@ -50,21 +66,29 @@ class livroController extends Controller
     public function edit(string $id)
     {
         //
+        $livro = livro::find($id);
+        return view('app.livros.create_edit',[
+            'livro' => $livro
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, livro $livro)
     {
         //
+        //$livro->update($request->all());
+        return redirect()->route('app.livro.tabela');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(livro $livro)
     {
         //
+        $livro->delete();
+        return redirect()->route('app.livro.tabela');
     }
 }

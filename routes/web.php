@@ -42,6 +42,7 @@ Route::resource('livros',livroController::class);
 
 Route::resource('videos',videoController::class);
 Route::get('/app/video/tabela', [videoController::class, 'tabela'])->name('app.video.tabela');
+Route::get('/app/livro/tabela', [livroController::class, 'tabela'])->name('app.livro.tabela');
 
 Route::resource('arquivos',arquivoController::class);
 
