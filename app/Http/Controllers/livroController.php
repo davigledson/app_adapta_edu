@@ -13,7 +13,10 @@ class livroController extends Controller
      */
     public function index()
     {
-        return view('site.livros');
+        $livros = livro::all();
+        return view('site.livros',[
+            'livros' => $livros 
+        ]);
        
     }
    
