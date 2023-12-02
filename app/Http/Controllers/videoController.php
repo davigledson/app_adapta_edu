@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\video;
 class videoController extends Controller
 {
     /**
@@ -13,13 +13,19 @@ class videoController extends Controller
     public function index()
     {
         //
-        return view('site.videos');
+        $videos = video::all();
+        return view('site.videos',[
+            'videos' => $videos 
+        ]);
     }
 
     public function tabela()
     {
         //
-        return view('app.video.tabela');
+        $videos = video::all();
+        return view('app.video.tabela',[
+            'videos' => $videos 
+        ]);
     }
 
     /**
@@ -36,6 +42,9 @@ class videoController extends Controller
     public function store(Request $request)
     {
         //
+        video::create($request->all());
+        return redirect()->route('app.video.tabela');
+
     }
 
     /**
@@ -49,24 +58,32 @@ class videoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(int $id)
     {
         //
+        $video = video::find($id);
+        return view('app.video.create_edit',[
+            'video' => $video
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, video $video)
     {
-        //
+        $video->update($request->all());
+        return redirect()->route('app.video.tabela');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(video $video)
     {
         //
+        $video->delete();
+        return redirect()->route('app.video.tabela');
+
     }
 }

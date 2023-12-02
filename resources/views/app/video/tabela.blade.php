@@ -13,62 +13,61 @@
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 white:bg-gray-700 white:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Product name
+                    ID
+                 </th>
+                   
+                <th scope="col" class="px-6 py-3">
+                   Link
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Color
+                    Texto
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Category
+                    Editar
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Price
+                   Excluir
                 </th>
             </tr>
         </thead>
         <tbody>
             <tr class="bg-white border-b white:bg-gray-800 white:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap white:text-white">
-                    Apple MacBook Pro 17"
+                @foreach ($videos as $video)
+                    
+               
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap white:text-white"> 
+                    
+                        {{$video->id}}
+                   
+                   
                 </th>
                 <td class="px-6 py-4">
-                    Silver
+                    {{$video->link}}
+                </td>
+               
+                <td class="px-6 py-4">
+                    {{$video->texto}}
                 </td>
                 <td class="px-6 py-4">
-                    Laptop
+                    <a href="{{route('videos.edit',['video'=>$video->id])}}">editar</a>
+                    
                 </td>
                 <td class="px-6 py-4">
-                    $2999
+                    <form id="form_{{$video->id}}" method="POST" action="{{route('videos.destroy',[
+                        'video'=>$video->id
+                    ])}}
+                    ">
+                    @method('DELETE')
+                    @csrf
+                    <a href="#" onclick="document.getElementById('form_{{$video->id}}').submit()">
+                        Excluir
+                    </a>
+                        
+                </form>
+                  
                 </td>
             </tr>
-            <tr class="bg-white border-b white:bg-gray-800 white:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap white:text-white">
-                    Microsoft Surface Pro
-                </th>
-                <td class="px-6 py-4">
-                    White
-                </td>
-                <td class="px-6 py-4">
-                    Laptop PC
-                </td>
-                <td class="px-6 py-4">
-                    $1999
-                </td>
-            </tr>
-            <tr class="bg-white white:bg-gray-800">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap white:text-white">
-                    Magic Mouse 2
-                </th>
-                <td class="px-6 py-4">
-                    Black
-                </td>
-                <td class="px-6 py-4">
-                    Accessories
-                </td>
-                <td class="px-6 py-4">
-                    $99
-                </td>
-            </tr>
+            @endforeach
         </tbody>
     </table>
 </div>

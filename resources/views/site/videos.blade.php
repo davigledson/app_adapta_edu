@@ -68,7 +68,14 @@
             <h2>Os 5 principais erros ao reconhecer o TOD em uma criança!</h2>
             <iframe width="300" height="215" src="https://www.youtube.com/embed/RJNf73jxKYU" title="YouTube video player" frameborder="0"></iframe>
         
-        </div>  
+        </div> 
+        @foreach ($videos as $video)
+        <div class="col-3 inferior">
+            <h2>{{$video->texto}}</h2>
+            <iframe width="300" height="215" src="{{$video->link}}" title="YouTube video player" frameborder="0"></iframe>
+        
+        </div> 
+        @endforeach 
     </div>       
 </main>
 
