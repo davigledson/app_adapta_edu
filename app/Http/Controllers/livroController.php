@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\livro;
+use Illuminate\Support\Facades\Storage;
 class livroController extends Controller
 {
     /**
@@ -79,6 +80,17 @@ class livroController extends Controller
     {
         //
         //$livro->update($request->all());
+        Storage::disk('public')->delete($livro->arquivo);
+
+        $arquivo = $request->file('arquivo');
+       $arquivo_urn = $arquivo->store('imagens','public');
+       $livro->arquivo = $arquivo_urn;
+
+       $livro->update([
+            'titulo' =>$request->titulo,
+            'link' =>$request->link,
+            'arquivo' => $arquivo_urn,
+             ]);
         return redirect()->route('app.livro.tabela');
     }
 
@@ -88,6 +100,7 @@ class livroController extends Controller
     public function destroy(livro $livro)
     {
         //
+        Storage::disk('public')->delete($livro->arquivo);
         $livro->delete();
         return redirect()->route('app.livro.tabela');
     }

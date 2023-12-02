@@ -1,6 +1,6 @@
 
 @if(isset($livro->id))
-<form method="post" class="max-w-md mx-auto p-4" action="{{route('livros.update',['livro'=> $livro->id])}}">
+<form method="post" class="max-w-md mx-auto p-4" action="{{route('livros.update',['livro'=> $livro->id])}}" enctype="multipart/form-data">
 
 @method('PUT')
 @csrf
