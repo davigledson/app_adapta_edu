@@ -16,6 +16,21 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('home.index')" :active="request()->routeIs('home.index')">
+                        {{ 'Pagina Inicial' }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('app.video.tabela')" :active="request()->routeIs('app.video.tabela')">
+                       Videos
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('home.index')" :active="request()->routeIs('home.index')">
+                        {{ 'Pagina Inicial' }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->

@@ -16,12 +16,18 @@ class videoController extends Controller
         return view('site.videos');
     }
 
+    public function tabela()
+    {
+        //
+        return view('app.video.tabela');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('app.video.create_edit');
     }
 
     /**
